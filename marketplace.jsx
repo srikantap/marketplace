@@ -14,7 +14,7 @@ var Button= ReactBootstrap.Button,
     Col= ReactBootstrap.Col,
     NavItem= ReactBootstrap.NavItem;
 
-var Navigation = React.createClass({
+var Header = React.createClass({
 
     render: function () {
         return (
@@ -34,45 +34,30 @@ var Navigation = React.createClass({
     }
 });
 
-const ProductCarousel = React.createClass({
-    getInitialState: function() {
-        return {
-            index: 0,
-            direction: null
-        };
-    },
-
-    handleSelect: function(selectedIndex, selectedDirection) {
-        this.setState({
-            index: selectedIndex,
-            direction: selectedDirection
-        });
-    },
-
+var ProductCarousel = React.createClass({
     render() {
+        var url = (this.props.thumbData[0].thumbnailUrl);
+
         return (
-            <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelect}>
+            <Carousel>
                 <CarouselItem>
-                    <img width={300} height={100} alt="Product 1" src="./assets/carousel.png"/>
+                    <img width={450} height={250} alt="900x500" src={url} />
                     <div className="carousel-caption">
                         <h3>First slide label</h3>
-                        <p>Descripton of First.</p>
                     </div>
                 </CarouselItem>
 
                 <CarouselItem>
-                    <img width={300} height={100} alt="Product 2" src="./assets/carousel.png"/>
+                    <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
                     <div className="carousel-caption">
                         <h3>Second slide label</h3>
-                        <p>Descripton of Second.</p>
                     </div>
                 </CarouselItem>
 
                 <CarouselItem>
-                    <img width={300} height={100} alt="Product 3" src="./assets/carousel.png"/>
+                    <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
                     <div className="carousel-caption">
                         <h3>Third slide label</h3>
-                        <p>Descripton of Third.</p>
                     </div>
                 </CarouselItem>
             </Carousel>
@@ -136,31 +121,37 @@ var Footer = React.createClass({
 var MarketPlace = React.createClass({
     getInitialState: function() {
         return {
-            image: ''
+            image: '',
+            stillLoading: true,
+            serverData: []
         };
     },
 
-    componentDidMount: function() {
-        $.get(this.props.source, function(result) {
+    componentWillMount: function() {
 
-            var lastApp = result.apps[0];
+        //alert("componentWillMount");
+    },
+
+    componentDidMount: function() {
+
+        $.get(this.props.source, function(results) {
+            var data = results.apps;
+            this.state.serverData = data;
 
             if (this.isMounted()) {
-                this.setState({
-                    image: lastApp.thumbnailUrl
-                });
-
-                alert(this.state.image);
+                this.setState({stillLoading: false });
             }
         }.bind(this));
     },
 
     render: function() {
+        //console.log("Render: serverData:", this.state.serverData);
+        if (this.state.stillLoading) return null;
+
         return(
             <div>
-                <Navigation/>
-                <ProductCarousel/>
-                <ThumbnailProducts img={this.state.image}/>
+                <Header/>
+                <ProductCarousel thumbData={this.state.serverData} />
                 <Footer/>
             </div>
         );
