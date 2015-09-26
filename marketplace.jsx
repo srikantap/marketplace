@@ -36,28 +36,28 @@ var Header = React.createClass({
 
 var ProductCarousel = React.createClass({
     render() {
-        var url = (this.props.thumbData[0].thumbnailUrl);
+        var data = this.props.data;
 
         return (
             <Carousel>
                 <CarouselItem>
-                    <img width={450} height={250} alt="900x500" src={url} />
+                    <img width={250} height={150} alt="900x500" src={data[0].thumbnailUrl} align="middle" />
                     <div className="carousel-caption">
-                        <h3>First slide label</h3>
+                        <h3>{data[0].title}</h3>
                     </div>
                 </CarouselItem>
 
                 <CarouselItem>
-                    <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+                    <img width={250} height={150} alt="900x500" src={data[1].thumbnailUrl} align="middle" />
                     <div className="carousel-caption">
-                        <h3>Second slide label</h3>
+                        <h3>{data[1].title}</h3>
                     </div>
                 </CarouselItem>
 
                 <CarouselItem>
-                    <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+                    <img width={250} height={150} alt="900x500" src={data[2].thumbnailUrl} align="middle" />
                     <div className="carousel-caption">
-                        <h3>Third slide label</h3>
+                        <h3>{data[2].title}</h3>
                     </div>
                 </CarouselItem>
             </Carousel>
@@ -67,36 +67,34 @@ var ProductCarousel = React.createClass({
 
 var ThumbnailProducts = React.createClass ({
     render: function () {
+        var data = this.props.data;
         return (
             <Grid>
                 <Row>
-                    <Col xs={6} md={4}>
-                        <Thumbnail src={this.props.img} alt="Product 4">
-                            <h3>Thumbnail label</h3>
-                            <p>Description</p>
+                    <Col xs={3} md={3}>
+                        <Thumbnail src={data[3].thumbnailUrl}>
+                            <h3>{data[3].title}</h3>
                             <p>
-                            <Button bsStyle="primary">Button</Button>&nbsp;
-                            <Button bsStyle="default">Button</Button>
+                            <img src="./assets/images/btn-cart.png"></img>
+                            <img src="./assets/images/btn-wishlist.png"></img>
                             </p>
                         </Thumbnail>
                     </Col>
-                    <Col xs={6} md={4}>
-                        <Thumbnail src="./assets/CiscoLogo.jpg" alt="Product 5">
-                            <h3>Thumbnail label</h3>
-                            <p>Description</p>
+                    <Col xs={3} md={3}>
+                        <Thumbnail src={data[4].thumbnailUrl}>
+                            <h3>{data[4].title}</h3>
                             <p>
-                            <Button bsStyle="primary">Button</Button>&nbsp;
-                            <Button bsStyle="default">Button</Button>
+                            <img src="./assets/images/btn-cart.png"></img>
+                            <img src="./assets/images/btn-wishlist.png"></img>
                             </p>
                         </Thumbnail>
                     </Col>
-                    <Col xs={6} md={4}>
-                        <Thumbnail src="./assets/CiscoLogo.png" alt="Product 6">
-                            <h3>Thumbnail label</h3>
-                            <p>Description</p>
+                    <Col xs={3} md={3}>
+                        <Thumbnail src={data[5].thumbnailUrl}>
+                            <h3>{data[5].title}</h3>
                             <p>
-                            <Button bsStyle="primary">Button</Button>&nbsp;
-                            <Button bsStyle="default">Button</Button>
+                            <img src="./assets/images/btn-cart.png"></img>
+                            <img src="./assets/images/btn-wishlist.png"></img>
                             </p>
                         </Thumbnail>
                     </Col>
@@ -121,19 +119,12 @@ var Footer = React.createClass({
 var MarketPlace = React.createClass({
     getInitialState: function() {
         return {
-            image: '',
             stillLoading: true,
             serverData: []
         };
     },
 
-    componentWillMount: function() {
-
-        //alert("componentWillMount");
-    },
-
     componentDidMount: function() {
-
         $.get(this.props.source, function(results) {
             var data = results.apps;
             this.state.serverData = data;
@@ -145,14 +136,13 @@ var MarketPlace = React.createClass({
     },
 
     render: function() {
-        //console.log("Render: serverData:", this.state.serverData);
         if (this.state.stillLoading) return null;
 
         return(
             <div>
                 <Header/>
-                <ProductCarousel thumbData={this.state.serverData} />
-                <Footer/>
+                <ProductCarousel data={this.state.serverData} />
+                <ThumbnailProducts data={this.state.serverData} />
             </div>
         );
     }
