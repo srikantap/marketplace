@@ -34,76 +34,6 @@ var Header = React.createClass({
     }
 });
 
-var ProductCarousel = React.createClass({
-    render() {
-        var data = this.props.data;
-
-        return (
-            <Carousel>
-                <CarouselItem>
-                    <img width={250} height={150} alt="900x500" src={data[0].thumbnailUrl} align="middle" />
-                    <div className="carousel-caption">
-                        <h3>{data[0].title}</h3>
-                    </div>
-                </CarouselItem>
-
-                <CarouselItem>
-                    <img width={250} height={150} alt="900x500" src={data[1].thumbnailUrl} align="middle" />
-                    <div className="carousel-caption">
-                        <h3>{data[1].title}</h3>
-                    </div>
-                </CarouselItem>
-
-                <CarouselItem>
-                    <img width={250} height={150} alt="900x500" src={data[2].thumbnailUrl} align="middle" />
-                    <div className="carousel-caption">
-                        <h3>{data[2].title}</h3>
-                    </div>
-                </CarouselItem>
-            </Carousel>
-        );
-      }
-});
-
-var ThumbnailProducts = React.createClass ({
-    render: function () {
-        var data = this.props.data;
-        return (
-            <Grid>
-                <Row>
-                    <Col xs={3} md={3}>
-                        <Thumbnail src={data[3].thumbnailUrl}>
-                            <h3>{data[3].title}</h3>
-                            <p>
-                            <img src="./assets/images/btn-cart.png"></img>
-                            <img src="./assets/images/btn-wishlist.png"></img>
-                            </p>
-                        </Thumbnail>
-                    </Col>
-                    <Col xs={3} md={3}>
-                        <Thumbnail src={data[4].thumbnailUrl}>
-                            <h3>{data[4].title}</h3>
-                            <p>
-                            <img src="./assets/images/btn-cart.png"></img>
-                            <img src="./assets/images/btn-wishlist.png"></img>
-                            </p>
-                        </Thumbnail>
-                    </Col>
-                    <Col xs={3} md={3}>
-                        <Thumbnail src={data[5].thumbnailUrl}>
-                            <h3>{data[5].title}</h3>
-                            <p>
-                            <img src="./assets/images/btn-cart.png"></img>
-                            <img src="./assets/images/btn-wishlist.png"></img>
-                            </p>
-                        </Thumbnail>
-                    </Col>
-                </Row>
-            </Grid>
-        );
-    }
-});
-
 var Footer = React.createClass({
     render: function() {
         return (
@@ -112,6 +42,67 @@ var Footer = React.createClass({
                     <p class="text-muted">Copyright reserved - Marketplace</p>
                 </div>
             </footer>
+        );
+    }
+});
+
+
+var ProductCarousel = React.createClass({
+    createCarouselItems: function(data)
+    {
+        var items = [];
+        for (var i = 0; i < this.props.carouselNum; i++)
+        {
+            items.push(
+                <CarouselItem>
+                    <div class="carousel">
+                        <img width={250} height={150} alt={data[i].title} src={data[i].thumbnailUrl} />
+                        <div className="carousel-caption">
+                            <h4>{data[i].title}</h4>
+                        </div>
+                    </div>
+                </CarouselItem>
+            );
+        }
+
+        //console.log(items);
+        return (items);
+    },
+
+    render: function() {
+        return (
+            <Carousel> {this.createCarouselItems(this.props.data)}</Carousel>
+        );
+      }
+});
+
+var ThumbnailProducts = React.createClass ({
+    renderThumbnails: function(rawData) {
+        var formattedData = rawData.map(function (thumb) {
+            return (
+                <Col xs={6} md={4}>
+                    <Thumbnail src={thumb.thumbnailUrl}>
+                        <h4>{thumb.title}</h4>
+                        <p>
+                            <img src="./assets/images/btn-cart.png"></img>
+                            <img src="./assets/images/btn-wishlist.png"></img>
+                        </p>
+                    </Thumbnail>
+                </Col>
+            );
+        });
+
+        //console.log(formattedData);
+        return(formattedData);
+    },
+
+    render: function () {
+        return (
+            <Grid>
+                <Row>
+                    {this.renderThumbnails(this.props.data)}
+                </Row>
+            </Grid>
         );
     }
 });
@@ -141,7 +132,7 @@ var MarketPlace = React.createClass({
         return(
             <div>
                 <Header/>
-                <ProductCarousel data={this.state.serverData} />
+                <ProductCarousel data={this.state.serverData} carouselNum={5}/>
                 <ThumbnailProducts data={this.state.serverData} />
             </div>
         );
