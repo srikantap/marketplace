@@ -132,7 +132,8 @@ var MarketPlace = React.createClass({
         if (this.state.stillLoading) return null;
 
         return(
-            <div>
+            <div class="panel-body">
+                <Header/>
                 <ProductCarousel data={this.state.serverData} carouselNum={2}/>
                 &nbsp; &nbsp;
                 <ThumbnailProducts data={this.state.serverData} />
