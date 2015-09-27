@@ -55,11 +55,9 @@ var ProductCarousel = React.createClass({
         {
             items.push(
                 <CarouselItem>
-                    <div class="carousel">
-                        <img width={250} height={150} alt={data[i].title} src={data[i].thumbnailUrl} />
-                        <div className="carousel-caption">
-                            <h4>{data[i].title}</h4>
-                        </div>
+                    <img width={250} height={150} alt={data[i].title} src={data[i].thumbnailUrl} />
+                    <div className="carousel-caption">
+                        <h4>{data[i].title}</h4>
                     </div>
                 </CarouselItem>
             );
@@ -131,9 +129,7 @@ var MarketPlace = React.createClass({
 
         return(
             <div>
-                <Header/>
-                <ProductCarousel data={this.state.serverData} carouselNum={5}/>
-                <ThumbnailProducts data={this.state.serverData} />
+                <ProductCarousel data={this.state.serverData} carouselNum={2}/>
             </div>
         );
     }
