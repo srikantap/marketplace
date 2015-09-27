@@ -55,7 +55,7 @@ var ProductCarousel = React.createClass({
         {
             items.push(
                 <CarouselItem>
-                    <img width={250} height={150} alt={data[i].title} src={data[i].thumbnailUrl} />
+                    <img width={250} height={200} alt={data[i].title} src={data[i].thumbnailUrl} />
                     <div className="carousel-caption">
                         <h4>{data[i].title}</h4>
                     </div>
@@ -63,34 +63,38 @@ var ProductCarousel = React.createClass({
             );
         }
 
-        //console.log(items);
         return (items);
     },
 
     render: function() {
         return (
-            <Carousel> {this.createCarouselItems(this.props.data)}</Carousel>
+            <Carousel> 
+                {this.createCarouselItems(this.props.data)}
+            </Carousel>
         );
       }
 });
 
 var ThumbnailProducts = React.createClass ({
-    renderThumbnails: function(rawData) {
+
+    createThumbnails: function(rawData) {
         var formattedData = rawData.map(function (thumb) {
+            var price = (thumb.price > 0) ? thumb.price : "Free";
+
             return (
                 <Col xs={6} md={4}>
                     <Thumbnail src={thumb.thumbnailUrl}>
-                        <h4>{thumb.title}</h4>
-                        <p>
-                            <img src="./assets/images/btn-cart.png"></img>
-                            <img src="./assets/images/btn-wishlist.png"></img>
-                        </p>
+                        <center> <p>
+                            <h4>{thumb.title}</h4> 
+                            <img src="./assets/images/btn-cart.png"></img> &nbsp;
+                            <img src="./assets/images/btn-wishlist.png"></img> &nbsp;
+                            <Button bsStyle="primary">{price}</Button> &nbsp;
+                        </p> </center>
                     </Thumbnail>
                 </Col>
             );
         });
 
-        //console.log(formattedData);
         return(formattedData);
     },
 
@@ -98,7 +102,7 @@ var ThumbnailProducts = React.createClass ({
         return (
             <Grid>
                 <Row>
-                    {this.renderThumbnails(this.props.data)}
+                    {this.createThumbnails(this.props.data)}
                 </Row>
             </Grid>
         );
@@ -130,6 +134,8 @@ var MarketPlace = React.createClass({
         return(
             <div>
                 <ProductCarousel data={this.state.serverData} carouselNum={2}/>
+                &nbsp; &nbsp;
+                <ThumbnailProducts data={this.state.serverData} />
             </div>
         );
     }
