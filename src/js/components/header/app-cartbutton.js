@@ -1,9 +1,7 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
-var AppStore = require('../../stores/app-store.js');
-//var StoreWatchMixin = require('../../mixins/StoreWatchMixin');
 
-var Button = require('react-bootstrap').Button;
+var AppStore = require('../../stores/app-store.js');
 
 var CartButton = React.createClass({
 
@@ -17,21 +15,4 @@ var CartButton = React.createClass({
     }
 });
 
-/*
-    getInitialState:function() {
-        return AppStore.getCartTotals();
-    },
-
-    componentWillMount:function() {
-        AppStore.addChangeListener(this._onChange)
-    },
-
-    componentWillUnmount:function() {
-        AppStore.removeChangeListener(this._onChange)
-    },
-
-    _onChange: function() {
-        this.setState({AppStore.getCartTotals());
-    },
-*/
 module.exports = CartButton;

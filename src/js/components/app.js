@@ -40,6 +40,7 @@ var App = React.createClass({
             <div>
                 <Header />
                 <ProductCarousel data={this.state.serverData} carouselNum={3}/>
+                <hr /> &nbsp;
                 <Locations>
                     <Location path="/" handler={Catalog} data={this.state.serverData} />
                     <Location path="/cart" handler={Cart} />

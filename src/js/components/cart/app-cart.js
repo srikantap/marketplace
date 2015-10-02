@@ -56,45 +56,41 @@ var Cart = React.createClass({
 
         return (
             <Grid>
-                <Row>
-                    <Table responsive>
-                       <thead>
-                            <tr>
-                            <th>Remove</th>
-                            <th>Item</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
-                            </tr>
-                        </thead>
+                <Table responsive striped bordered condensed hover>
+                   <thead>
+                        <tr>
+                        <th>Remove</th>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
-                            {items}
-                        </tbody>
+                    <tbody>
+                        {items}
+                    </tbody>
 
-                        <tfoot>
-                            <tr>
-                            <td colSpan="5" className="text-right">Total</td>
-                            <td>${total}</td>
-                            </tr>
-                        </tfoot>
-                    </Table>
-                </Row>
+                    <tfoot>
+                        <tr>
+                        <td colSpan="4" className="text-right">Total</td>
+                        <td>${total}</td>
+                        </tr>
+                    </tfoot>
+                </Table>
 
-                <Row>
-                    <Table responsive>
-                       <thead>
-                            <tr>
-                            <th>Remove</th>
-                            <th>Item</th>
-                            </tr>
-                        </thead>
+                <Table responsive striped bordered condensed hover>
+                   <thead>
+                        <tr>
+                        <th>Remove</th>
+                        <th>Item</th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
-                            {wishlistitems}
-                        </tbody>
+                    <tbody>
+                        {wishlistitems}
+                    </tbody>
 
-                    </Table>
-                </Row>
+                </Table>
 
                 <Link href="/">Go to Apps Market</Link>
             </Grid>

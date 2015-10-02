@@ -36,7 +36,7 @@ function _addToWishlist(item) {
     }
 }
 
-function _removeFromWishlist(item) {
+function _removeFromWishlist(index) {
     _wishlistItems[index].inWishlist = false;
     _wishlistItems.splice(index, 1);
 }
@@ -97,7 +97,7 @@ var AppStore = assign(EventEmitter.prototype, {
                 break;
 
             case AppConstants.REMOVE_WISHLIST:
-                _removeFromWishlist(payload.action.item);
+                _removeFromWishlist(payload.action.index);
                 break;
         }
 
