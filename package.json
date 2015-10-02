@@ -8,6 +8,8 @@
     "flux": "^2.0.3",
     "gulp": "^3.9.0",
     "react": "^0.13.3",
+    "bootstrap": "^3.3.5",
+    "react-bootstrap": "^0.25.1",
     "react-async": "^2.1.0",
     "react-router-component": "^0.25.1",
     "reactify": "^1.1.1",

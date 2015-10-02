@@ -3,8 +3,6 @@
 var Button= ReactBootstrap.Button,
     ButtonToolbar= ReactBootstrap.ButtonToolbar,
     Nav= ReactBootstrap.Nav,
-    Navbar= ReactBootstrap.Navbar,
-    NavDropdown= ReactBootstrap.NavDropdown,
     MenuItem= ReactBootstrap.MenuItem,
     Carousel= ReactBootstrap.Carousel,
     CarouselItem= ReactBootstrap.CarouselItem,
@@ -12,6 +10,8 @@ var Button= ReactBootstrap.Button,
     Grid= ReactBootstrap.Grid,
     Row= ReactBootstrap.Row,
     Col= ReactBootstrap.Col,
+    Navbar= ReactBootstrap.Navbar,
+    NavDropdown= ReactBootstrap.NavDropdown,
     NavItem= ReactBootstrap.NavItem;
 
 var Header = React.createClass({
