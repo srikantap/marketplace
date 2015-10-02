@@ -1,0 +1,25 @@
+/* Fix carousel image to center */
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+/* Set thumbnail size */
+.thumbnail > img {
+    width: 200px;
+    height: 200px;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url('fonts/HelveticaNeue.ttf'),
+    url('Thonburi-Bold.eot'); /* IE */
+}
+
+/* Forcefully use fonts, for now */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'HelveticaNeue'!important;
+}
+p, div, body {
+    font-family: 'HelveticaNeue'!important;
+}
+
