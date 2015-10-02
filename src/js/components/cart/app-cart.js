@@ -30,8 +30,9 @@ var Cart = React.createClass({
     },
 
     render:function() {
-        var total = 0;
+        var total = 0, cartCount = 0;
         var items = this.state.cartItems.map(function(item, i) {
+            cartCount++;
             var subtotal = item.price;
             total += item.price;
             return (
@@ -43,8 +44,9 @@ var Cart = React.createClass({
             );
         });
 
-        var wishlisttotal = 0;
+        var wishlisttotal = 0, wishlistCount = 0;
         var wishlistitems = this.state.wishlistItems.map(function(item, i) {
+            wishlistCount++;
             return (
                 <tr key={i}>
                 <td><RemoveFromWishlist index={i} /></td>
@@ -55,7 +57,7 @@ var Cart = React.createClass({
 
         return (
             <div>
-            <h3> Items in cart </h3>
+            <h3> Items in cart: {cartCount} </h3>
             <Table responsive striped bordered condensed hover>
                <thead>
                     <tr>
@@ -76,7 +78,7 @@ var Cart = React.createClass({
 
             <hr />
 
-            <h3> Items in wishlist </h3>
+            <h3> Items in wishlist: {wishlistCount} </h3>
             <Table responsive striped bordered condensed hover>
                <thead>
                     <tr>
