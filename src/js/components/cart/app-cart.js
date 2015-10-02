@@ -11,6 +11,7 @@ function cartItems(){
 
 var Cart = React.createClass({
   mixins:[StoreWatchMixin(cartItems)],
+
   render:function(){
     var total = 0;
     var items = this.state.items.map(function(item, i){
