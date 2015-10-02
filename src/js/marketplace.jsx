@@ -75,24 +75,62 @@ var ProductCarousel = React.createClass({
       }
 });
 
-var ThumbnailProducts = React.createClass ({
+var SingleProductThumbnail = React.createClass ({
+    getInitialState: function() {
+        return {
+            inWishlist: true,
+            inCart: false
+        }
+    },
+
+    handleCartAdd: function() {
+        if (this.state.inCart)
+        {
+            alert("Item already in cart");
+        }
+        else
+        {
+            alert("Adding item to cart");
+            this.setState({inCart: true});
+        }
+    },
+
+    handleWishlistAdd: function() {
+        alert("handleWishlistAdd");
+        this.setState({inWishlist: false});
+    },
+
+    render: function() {
+        var cartButton = [];
+        if (!this.state.inCart) 
+            cartButton.push(<img src="./assets/images/btn-cart.png" onClick={this.handleCartAdd}></img>);
+        else
+            cartButton.push(<img src="./assets/images/btn-cart.png"></img>);
+
+        return (
+            <Thumbnail src={this.props.thumbnailUrl}>
+                <center> <p>
+                    <h4>{this.props.title}</h4>
+                    {cartButton}
+                    <img src="./assets/images/btn-wishlist.png" onClick={this.handleWishlistAdd}></img> &nbsp;
+                    <Button bsStyle="primary">{this.props.price}</Button> &nbsp;
+                </p> </center>
+            </Thumbnail>
+        );
+    }
+});
+
+var ProductsThumbnails = React.createClass ({
 
     createThumbnails: function(rawData) {
         var formattedData = rawData.map(function (thumb) {
             var price = (thumb.price > 0) ? thumb.price : "Free";
-
             return (
                 <Col xs={6} md={4}>
-                    <Thumbnail src={thumb.thumbnailUrl}>
-                        <center> <p>
-                            <h4>{thumb.title}</h4> 
-                            <img src="./assets/images/btn-cart.png"></img> &nbsp;
-                            <img src="./assets/images/btn-wishlist.png"></img> &nbsp;
-                            <Button bsStyle="primary">{price}</Button> &nbsp;
-                        </p> </center>
-                    </Thumbnail>
+                    <SingleProductThumbnail thumbnailUrl={thumb.thumbnailUrl} price={price} title={thumb.title} />
                 </Col>
             );
+
         });
 
         return(formattedData);
@@ -136,7 +174,7 @@ var MarketPlace = React.createClass({
                 <Header/>
                 <ProductCarousel data={this.state.serverData} carouselNum={2}/>
                 &nbsp; &nbsp;
-                <ThumbnailProducts data={this.state.serverData} />
+                <ProductsThumbnails data={this.state.serverData} />
             </div>
         );
     }
