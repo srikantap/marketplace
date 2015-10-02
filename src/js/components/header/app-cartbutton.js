@@ -8,7 +8,6 @@ var CartButton = React.createClass({
   render: function() {
       return (
           <div>
-              <Button>test</Button>
               <Link href="/cart" className="btn btn-success"> Cart Items: </Link>
           </div>
       );
