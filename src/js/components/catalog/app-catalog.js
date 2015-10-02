@@ -4,6 +4,10 @@ var AddToCart = require('./app-addtocart.js')
 //var StoreWatchMixin = require('../../mixins/StoreWatchMixin');
 var CatalogItem = require('../catalog/app-catalogitem');
 
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+
 var Catalog = React.createClass ({
 
     getInitialState:function() {
@@ -22,17 +26,29 @@ var Catalog = React.createClass ({
         this.setState({items: AppStore.getCatalog(this.props.data)});
     },
 
+    createThumbnails: function(rawData) {
+        var formattedData = rawData.map(function (thumb) {
+            return (
+                <Row>
+                    <Col xs={8} md={3}>
+                        <CatalogItem url={thumb.id} item={thumb} />
+                    </Col>
+                </Row>
+            );
+        });
+
+        return(formattedData);
+    },
+
     render:function() {
         //console.log("Catalog.render: ", this.props.data);
-        var items = this.state.items.map(function(item) {
-            return <CatalogItem url={item.id} item={item} />
-
-        })
         return (
-            <div className="row">
-            {items}
-            </div>
-        )
+            <Grid>
+                <Row>
+                    {this.createThumbnails(this.props.data)}
+                </Row>
+            </Grid>
+        );
     }
 });
 

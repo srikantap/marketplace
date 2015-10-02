@@ -60,8 +60,9 @@ var AppStore = assign(EventEmitter.prototype, {
     },
 
     getCatalog: function(data) {
-        populateCatalog(data);
-        return _catalog
+        _catalog = data;
+        console.log(_catalog);
+        return _catalog;
     },
 
     getCartTotals: function(){
