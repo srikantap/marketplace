@@ -32,13 +32,12 @@ var Cart = React.createClass({
     render:function() {
         var total = 0;
         var items = this.state.cartItems.map(function(item, i) {
-            var subtotal = item.price * item.qty;
-            total += subtotal;
+            var subtotal = item.price;
+            total += item.price;
             return (
                 <tr key={i}>
                 <td><RemoveFromCart index={i} /></td>
                 <td>{item.title}</td>
-                <td>{item.qty}</td>
                 <td>${subtotal}</td>
                 </tr>
             );
@@ -55,45 +54,45 @@ var Cart = React.createClass({
         });
 
         return (
-            <Grid>
-                <Table responsive striped bordered condensed hover>
-                   <thead>
-                        <tr>
-                        <th>Remove</th>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>Subtotal</th>
-                        </tr>
-                    </thead>
+            <div>
+            <h3> Items in cart </h3>
+            <Table responsive striped bordered condensed hover>
+               <thead>
+                    <tr>
+                    <th>Remove</th>
+                    <th>Item</th>
+                    <th>Subtotal</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        {items}
-                    </tbody>
+                <tbody>
+                    {items}
+                </tbody>
 
-                    <tfoot>
-                        <tr>
-                        <td colSpan="4" className="text-right">Total</td>
-                        <td>${total}</td>
-                        </tr>
-                    </tfoot>
-                </Table>
+                <tfoot>
+                    <tr> <td colSpan="4" className="text-right"><b> Total: ${total} </b></td> </tr>
+                </tfoot>
+            </Table>
 
-                <Table responsive striped bordered condensed hover>
-                   <thead>
-                        <tr>
-                        <th>Remove</th>
-                        <th>Item</th>
-                        </tr>
-                    </thead>
+            <hr />
 
-                    <tbody>
-                        {wishlistitems}
-                    </tbody>
+            <h3> Items in wishlist </h3>
+            <Table responsive striped bordered condensed hover>
+               <thead>
+                    <tr>
+                    <th>Remove</th>
+                    <th>Item</th>
+                    </tr>
+                </thead>
 
-                </Table>
+                <tbody>
+                    {wishlistitems}
+                </tbody>
 
-                <Link href="/">Go to Apps Market</Link>
-            </Grid>
+            </Table>
+
+            <Link href="/">Go to Apps Market</Link>
+            </div>
         );
     }
 });

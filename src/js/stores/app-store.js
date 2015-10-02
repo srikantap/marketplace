@@ -17,7 +17,6 @@ function _removeItem(index) {
 
 function _addItem(item) {
     if(!item.inCart) {
-        item['qty'] = 1;
         item['inCart'] = true;
         _cartItems.push(item);
     }
@@ -39,16 +38,6 @@ function _addToWishlist(item) {
 function _removeFromWishlist(index) {
     _wishlistItems[index].inWishlist = false;
     _wishlistItems.splice(index, 1);
-}
-
-
-function _cartTotals() {
-    var qty =0, total = 0;
-    _cartItems.forEach(function(cartItem){
-        qty+=cartItem.qty;
-        total+=cartItem.qty*cartItem.price;
-    });
-    return {'qty': qty, 'total': total};
 }
 
 var AppStore = assign(EventEmitter.prototype, {
@@ -75,10 +64,6 @@ var AppStore = assign(EventEmitter.prototype, {
     getCatalog: function(data) {
         _catalog = data;
         return _catalog;
-    },
-
-    getCartTotals: function(){
-        return _cartTotals()
     },
 
     dispatcherIndex: AppDispatcher.register(function(payload) {
