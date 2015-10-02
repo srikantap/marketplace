@@ -1,6 +1,7 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
 var AddToCart = require('./app-addtocart');
+var AddToWishlist = require('./app-addtowishlist');
 
 var Button = require('react-bootstrap').Button;
 var Thumbnail = require('react-bootstrap').Thumbnail;
@@ -17,17 +18,11 @@ var CatalogItem = React.createClass({
         return (
             <Thumbnail src={this.props.item.thumbnailUrl}>
                 <center> <p>
-                    <h4>{this.props.item.title}</h4>
+                    <h5><em>{this.props.item.title}</em></h5>
 
-                    <div className="btn-group">
-
-                        <Button bsStyle="primary">{price}</Button> &nbsp;
-                        <Link href={'/item/' + this.props.item.id} className="btn btn-default">Learn More</Link>
-                        <br/>
-                        &nbsp;
-                        <AddToCart item={this.props.item} /> &nbsp;
-                        <img src="./assets/images/btn-wishlist.png"></img> &nbsp;
-                    </div>
+                    <Button bsStyle="primary">{price}</Button> &nbsp;
+                    <AddToCart item={this.props.item} /> &nbsp;
+                    <AddToWishlist item={this.props.item} /> &nbsp;
 
                 </p> </center>
             </Thumbnail>
@@ -35,4 +30,5 @@ var CatalogItem = React.createClass({
     }
 });
 
+                        //<Link href={'/item/' + this.props.item.id} className="btn btn-default">Learn More</Link>
 module.exports = CatalogItem;

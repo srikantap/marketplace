@@ -29,11 +29,9 @@ var Catalog = React.createClass ({
     createThumbnails: function(rawData) {
         var formattedData = rawData.map(function (thumb) {
             return (
-                <Row>
-                    <Col xs={8} md={3}>
-                        <CatalogItem url={thumb.id} item={thumb} />
-                    </Col>
-                </Row>
+                <Col xs={8} md={3}>
+                    <CatalogItem url={thumb.id} item={thumb} />
+                </Col>
             );
         });
 
@@ -52,4 +50,4 @@ var Catalog = React.createClass ({
     }
 });
 
-module.exports = Catalog
+module.exports = Catalog;

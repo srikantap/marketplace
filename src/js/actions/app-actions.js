@@ -14,6 +14,18 @@ var AppActions = {
       index: index
     })
   },
+  addToWishlist: function(item){
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.ADD_WISHLIST,
+      item: item
+    })
+  },
+  removeFromWishlist: function(index){
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.REMOVE_WISHLIST,
+      index: index
+    })
+  },
   increaseItem: function(index){
     AppDispatcher.handleViewAction({
       actionType: AppConstants.INCREASE_ITEM,

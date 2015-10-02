@@ -7,7 +7,6 @@ var AddToCart = React.createClass({
     },
 
     render:function() {
-        //return <button className="btn btn-default" onClick={this.handler}>Add To Cart</button>
         return <img src="./assets/images/btn-cart.png" onClick={this.handler}></img>;
     }
 });

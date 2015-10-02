@@ -8,38 +8,47 @@ var CHANGE_EVENT = 'change';
 
 var _catalog = [];
 var _cartItems = [];
+var _wishlistItems = [];
 
 function _removeItem(index) {
     _cartItems[index].inCart = false;
     _cartItems.splice(index, 1);
 }
 
-function _addItem(item){
-    if(!item.inCart){
+function _addItem(item) {
+    if(!item.inCart) {
         item['qty'] = 1;
         item['inCart'] = true;
         _cartItems.push(item);
     }
     else {
-        console.log("Item already in cart: ", item);
+        console.log("Item already in cart: ", item.id);
     }
 }
 
-function _cartTotals() {
-  var qty =0, total = 0;
-  _cartItems.forEach(function(cartItem){
-    qty+=cartItem.qty;
-    total+=cartItem.qty*cartItem.cost;
-  });
-  return {'qty': qty, 'total': total};
+function _addToWishlist(item) {
+    if(!item.inWishlist) {
+        item['inWishlist'] = true;
+        _wishlistItems.push(item);
+    }
+    else {
+        console.log("Item already in cart: ", item.id);
+    }
 }
 
-function populateCatalog(data) {
-    data.forEach (function(item) {
-        _catalog.push(item);
-    });
+function _removeFromWishlist(item) {
+    _wishlistItems[index].inWishlist = false;
+    _wishlistItems.splice(index, 1);
+}
 
-    console.log(_catalog);
+
+function _cartTotals() {
+    var qty =0, total = 0;
+    _cartItems.forEach(function(cartItem){
+        qty+=cartItem.qty;
+        total+=cartItem.qty*cartItem.price;
+    });
+    return {'qty': qty, 'total': total};
 }
 
 var AppStore = assign(EventEmitter.prototype, {
@@ -56,12 +65,15 @@ var AppStore = assign(EventEmitter.prototype, {
     },
 
     getCart: function() {
-        return _cartItems
+        return _cartItems;
+    },
+
+    getWishlist: function() {
+        return _wishlistItems;
     },
 
     getCatalog: function(data) {
         _catalog = data;
-        console.log(_catalog);
         return _catalog;
     },
 
@@ -69,7 +81,7 @@ var AppStore = assign(EventEmitter.prototype, {
         return _cartTotals()
     },
 
-    dispatcherIndex: AppDispatcher.register(function(payload){
+    dispatcherIndex: AppDispatcher.register(function(payload) {
         var action = payload.action; // this is our action from handleViewAction
         switch(action.actionType){
             case AppConstants.ADD_ITEM:
@@ -78,6 +90,14 @@ var AppStore = assign(EventEmitter.prototype, {
 
             case AppConstants.REMOVE_ITEM:
                 _removeItem(payload.action.index);
+                break;
+
+            case AppConstants.ADD_WISHLIST:
+                _addToWishlist(payload.action.item);
+                break;
+
+            case AppConstants.REMOVE_WISHLIST:
+                _removeFromWishlist(payload.action.item);
                 break;
         }
 
