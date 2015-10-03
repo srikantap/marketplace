@@ -6,11 +6,9 @@ var AppStore = require('../../stores/app-store.js');
 var CartButton = React.createClass({
 
     render: function() {
+        console.log("Cartbutton render: size of list: ", this.props.numItems);
         return (
-            <div>
-                <Link href="/cart" className="btn btn-success"> Cart </Link> &nbsp;
-                <Link href="/cart" className="btn btn-success"> Wishlist </Link>
-            </div>
+            <Link href="/cart" className="btn btn-success"> Cart [{this.props.numItems}]</Link>
         );
     }
 });

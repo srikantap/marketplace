@@ -45,6 +45,9 @@ var App = React.createClass({
                     <Location path="/" handler={Catalog} data={this.state.serverData} />
                     <Location path="/cart" handler={Cart} />
                 </Locations>
+                <div id="footer"> <div class="container">
+                    <p class="muted credit"> Marketplace: Copyright</p>
+                </div></div>
             </div>
         );
     }

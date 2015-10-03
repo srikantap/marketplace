@@ -7,7 +7,9 @@ var App = require('../components/app.js');
 var CHANGE_EVENT = 'change';
 
 var _catalog = [];
+
 var _cartItems = [];
+
 var _wishlistItems = [];
 
 function _removeItem(index) {
@@ -57,8 +59,16 @@ var AppStore = assign(EventEmitter.prototype, {
         return _cartItems;
     },
 
+    getCartSize: function() {
+        return _cartItems.length;
+    },
+
     getWishlist: function() {
         return _wishlistItems;
+    },
+
+    getWishlistSize: function() {
+        return _wishlistItems.length;
     },
 
     getCatalog: function(data) {
