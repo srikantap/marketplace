@@ -7,9 +7,7 @@ var App = require('../components/app.js');
 var CHANGE_EVENT = 'change';
 
 var _catalog = [];
-
 var _cartItems = [];
-
 var _wishlistItems = [];
 
 function _removeItem(index) {
@@ -22,7 +20,8 @@ function _addItem(item) {
         item['inCart'] = true;
         _cartItems.push(item);
     }
-    else {
+    else /* Prevent duplication */
+    {
         console.log("Item already in cart: ", item.id);
     }
 }
@@ -32,7 +31,8 @@ function _addToWishlist(item) {
         item['inWishlist'] = true;
         _wishlistItems.push(item);
     }
-    else {
+    else /* Prevent duplication */
+    {
         console.log("Item already in cart: ", item.id);
     }
 }
@@ -77,7 +77,7 @@ var AppStore = assign(EventEmitter.prototype, {
     },
 
     dispatcherIndex: AppDispatcher.register(function(payload) {
-        var action = payload.action; // this is our action from handleViewAction
+        var action = payload.action;
         switch(action.actionType){
             case AppConstants.ADD_ITEM:
                 _addItem(payload.action.item);
