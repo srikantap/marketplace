@@ -1,7 +1,5 @@
 var React = require('react');
 var AppStore = require('../../stores/app-store.js');
-var AddToCart = require('./app-addtocart.js')
-//var StoreWatchMixin = require('../../mixins/StoreWatchMixin');
 var CatalogItem = require('../catalog/app-catalogitem');
 
 var Grid = require('react-bootstrap').Grid;
